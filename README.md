@@ -10,7 +10,6 @@ To create programs that simulate receiving a packet, processing it, looking up t
 * A function that reads necessary header information for the packet type, looks up what output port to send the packet out on, and returns that value.
 * Use principle of longest match to determine output port.
 * Main driver function to generate packets that test routing functionality and output the results in the format "Packet from IP to IP was routed on interface X".
-
 ###### Switch:
 * A struct that holds an Ethernet frame.
 * A function that reads necessary header information for the packet type, looks up what output port to send the packet out on and returns that value.

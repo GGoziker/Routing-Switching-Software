@@ -17,8 +17,7 @@ To create programs that simulate receiving a packet, processing it, looking up t
 * Main driver function to generate packets that test switching functionality and output the results in the format "Frame from MAC to MAC was switched onto interface(s) X".
 
 ##### Deployment
-* Run testUI.java first (server), then run softTokenUI.java (client)
-* Both components are designed to be run on the same device. Port numbers are hardcoded.
+* Run main.cpp.
 
 ##### Notes
 * The router and switch should each have at least 4 network interfaces.

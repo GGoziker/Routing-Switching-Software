@@ -5,10 +5,16 @@ An application for my CSS432 class (Computer Networking).
 To create programs that simulate receiving a packet, processing it, looking up the output interface in the table, and forwarding it.
 
 ##### Components
+* At least four network interfaces each for router and switch.
 ###### Router:
 * A struct that holds an IPv4 packet.
 * A function that reads necessary header information for the packet type, looks up what output port to send the packet out on, and returns that value.
 * Use principle of longest match to determine output port.
+* Main driver function to generate packets that test your routing functionality and output the results.
+###### Switch:
+* A struct that holds an Ethernet frame.
+* A function that reads necessary header information for the packet type, looks up what output port to send the packet out on, and returns that value.
+* Learn the table from packets that travel through the switch.
 
 ##### Deployment
 * Run testUI.java first (server), then run softTokenUI.java (client)

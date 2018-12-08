@@ -1,0 +1,114 @@
+/Users/gahl/CLionProjects/Routing_Switching_Software/cmake-build-debug/Routing_Switching_Software
+If you want to print runtime information during execution, enter 1. If not, enter 0.
+0
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------
+ROUTER TEST
+----------------------------------------------------------------------------------------
+Simulates receiving an IPv4packet, routing it through a lookup table using principle of longestmatch.
+Table is hardcoded in router constructor.
+
+
+Forwarding table:
+dest									mask		interface
+00000000.00000000.00000000.00000000		0			interface 1
+00000001.00000010.00000011.00000100		8			interface 2
+00000001.00000010.00000011.00000100		16			interface 3
+00000001.00000010.00000011.10000000		25			interface 4
+
+packet 			11111111.11111111.11111111.11111111
+routed to		00000000.00000000.00000000.00000000		0			interface 1
+
+packet 			00000001.00000001.00000011.00000100
+routed to		00000001.00000010.00000011.00000100		8			interface 2
+
+packet 			00000001.00000011.00000011.00000100
+routed to		00000001.00000010.00000011.00000100		8			interface 2
+
+packet 			00000001.00000010.00000100.00000100
+routed to		00000001.00000010.00000011.00000100		16			interface 3
+
+packet 			00000001.00000010.00000011.10101010
+routed to		00000001.00000010.00000011.10000000		25			interface 4
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------
+SWITCH TEST
+----------------------------------------------------------------------------------------
+Simulates receiving anEthernet frame, forwarding it through a lookup table.
+Table isinitially empty, builds up as packets travel through the switch.
+
+
+Switch table: table is empty
+
+
+Attempting to forward 11111111.11111111.11111111.11111111.11111111.11111111 from interface 1
+no entry found for frame 11111111.11111111.11111111.11111111.11111111.11111111
+Switch table:
+MAC address													interface
+11111111.11111111.11111111.11111111.11111111.11111111		1
+
+
+Attempting to forward 00000001.00000001.00000011.00000100.00000101.00000110 from interface 2
+no entry found for frame 00000001.00000001.00000011.00000100.00000101.00000110
+frame 			00000001.00000001.00000011.00000100.00000101.00000110
+broadcast to	11111111.11111111.11111111.11111111.11111111.11111111		1
+Switch table:
+MAC address													interface
+11111111.11111111.11111111.11111111.11111111.11111111		1
+00000001.00000001.00000011.00000100.00000101.00000110		2
+
+
+Attempting to forward 00000001.00000001.00000011.00000100.00000101.00000110 from interface 1
+frame 			00000001.00000001.00000011.00000100.00000101.00000110
+forwarded to		00000001.00000001.00000011.00000100.00000101.00000110		2
+Switch table:
+MAC address													interface
+11111111.11111111.11111111.11111111.11111111.11111111		1
+00000001.00000001.00000011.00000100.00000101.00000110		2
+
+
+Attempting to forward 00000001.00000011.00000011.00000100.00000101.00000110 from interface 3
+no entry found for frame 00000001.00000011.00000011.00000100.00000101.00000110
+frame 			00000001.00000011.00000011.00000100.00000101.00000110
+broadcast to	11111111.11111111.11111111.11111111.11111111.11111111		1
+frame 			00000001.00000011.00000011.00000100.00000101.00000110
+broadcast to	00000001.00000001.00000011.00000100.00000101.00000110		2
+Switch table:
+MAC address													interface
+11111111.11111111.11111111.11111111.11111111.11111111		1
+00000001.00000001.00000011.00000100.00000101.00000110		2
+00000001.00000011.00000011.00000100.00000101.00000110		3
+
+
+Attempting to forward 00000001.00000011.00000011.00000100.00000101.00000110 from interface 3
+Output interface matches input interface.
+Discarding frame 00000001.00000011.00000011.00000100.00000101.00000110
+Switch table:
+MAC address													interface
+11111111.11111111.11111111.11111111.11111111.11111111		1
+00000001.00000001.00000011.00000100.00000101.00000110		2
+00000001.00000011.00000011.00000100.00000101.00000110		3
+
+
+
+Process finished with exit code 0

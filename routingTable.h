@@ -20,7 +20,7 @@ public:
      * An entry in the routing table
      */
     struct routingTableEntry{
-         bitset<32> dest;
+         bitset<32> dest;   // IP address
         int mask;
         string interface;
         routingTableEntry(bitset<32> dest, int mask,

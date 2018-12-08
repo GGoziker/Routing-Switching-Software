@@ -21,7 +21,7 @@ Router::Router(bool debug) : debug(debug) {
   table->addEntry({bitset<32> (0x01020304), 16, "interface 3"});
 
   // Route 4: 1.2.3.128 /30
-  table->addEntry({bitset<32> (0x01020380), 30, "interface 4"});
+  table->addEntry({bitset<32> (0x01020380), 25, "interface 4"});
 
 
 }
@@ -39,7 +39,7 @@ void Router::route(Router::packet p) {
 
 
 void Router::printTable() {
-  cout << *this->table << endl;
+  cout << "Forwarding table: " << *this->table << endl;
 }
 
 

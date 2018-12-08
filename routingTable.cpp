@@ -18,25 +18,26 @@ routingTable::routingTable(bool debug) : debug(debug){}
  * @return          routingTableEntry which best fits address
  */
 routingTable::routingTableEntry routingTable::lookup(bitset<32> address) const{
-  bool timeToContinue;
+  bool notMatch;
   routingTableEntry retVal{bitset<32> (0x01020304), -1, "default"};
   int longestMask = -1;
 
   // Check every route entered in table
   for(routingTableEntry route : routes) {
     if(debug){cout << "route: " << route << flush;}
-    timeToContinue - false;
+    notMatch = false;
     // If route couldn't be longest match, skip route
     if (route.mask <= longestMask) { continue; }
     // If address doesn't match route, skip route
     for (int i = 0; i < route.mask; i++) {
-      if(debug){cout << "comparing address: " << address[31 - i] << " to route " << route.dest[31 - i] << endl;}
+      if(debug){cout << "comparing address bit " << address[31 - i] << " to route bit " << route.dest[31 - i] << endl;}
       if (address[31 - i] != route.dest[31 - i]) {
-        timeToContinue = true;
+        notMatch = true;
         break;
       }
     }
-    if (timeToContinue) {
+    if (notMatch) {
+      if(debug){cout << "not a match"<<endl;}
       continue;
     } else {
       // If this line reached, route is longest match
@@ -44,6 +45,7 @@ routingTable::routingTableEntry routingTable::lookup(bitset<32> address) const{
       retVal = route;
       longestMask = route.mask;
     }
+
   }
   if(longestMask == -1) {
     if(debug){cout << "\nNo match found" << endl;}

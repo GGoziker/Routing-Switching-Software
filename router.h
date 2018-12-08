@@ -1,6 +1,13 @@
-//
-// Created by Gahl Goziker on 12/4/18.
-//
+/**
+ * router.h
+ *
+ * Created by Gahl Goziker on 12/4/18.
+ *
+ * Simulates receiving an IPv4 packet, routing it through a lookup table using
+ * principle of longest match.
+ * Table is hardcoded in router constructor.
+ */
+
 
 #ifndef ROUTING_SWITCHING_SOFTWARE_ROUTER_H
 #define ROUTING_SWITCHING_SOFTWARE_ROUTER_H
@@ -16,7 +23,7 @@ class Router {
 public:
 
 
-    //struct that will hold an IPv4 packet
+    // struct that will hold an IPv4 packet
     struct packet{
         // 160 bits in the header
         bitset<4> version;
@@ -46,6 +53,7 @@ public:
 
 
 private:
+    /** Determines whether debugging messages should be printed */
     bool debug;
     routingTable* table;
     friend ostream& operator<<(ostream& os, const packet& p);
